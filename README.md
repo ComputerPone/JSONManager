@@ -29,9 +29,7 @@ You can download any stable or newest version in [/releases](https://github.com/
 
 ### JSONConfig
 
-Use when not wanting to use the global settings,<br/>
-Using `new JSONConfig()` to create a new config.<br/>
-This will copy the current settings from JSONUtils.
+Use `new JSONConfig()` to create a new config.
 
 ### Threaded
 
@@ -49,8 +47,6 @@ Disabled by default.
 > It's recommended to keep this off for smaller files.</br>
 > And to use it for big long ones.
 
-- `JSONUtils.threaded()` : Returns true/false for threaded suffix
-- `JSONUtils.threaded(true/false)` : Set global threaded to true/false
 - `new JSONConfig().threaded()` : Returns true/false for threaded
 - `new JSONConfig().threaded(true/false)` : Set threaded to true/false
 
@@ -63,8 +59,6 @@ Disabled by default.
 > Using `stringify(config)` `toString(config)` `toBytes(config)`<br/>
 > For when you don't want to use the global settings
 
-- `JSONUtils.suffix()` : Returns true/false for global suffix
-- `JSONUtils.suffix(true/false)` : Set global suffix to true/false
 - `new JSONConfig().suffix()` : Returns true/false for suffix
 - `new JSONConfig().suffix(true/false)` : Set suffix to true/false
 
@@ -77,8 +71,6 @@ Disabled by default.
 > Using `stringify(config)` `toString(config)` `toBytes(config)`<br/>
 > For when you don't want to use the global settings
 
-- `JSONUtils.tabs()` : Returns true/false for global tabs
-- `JSONUtils.tabs(true/false)` : Set global tabs to true/false
 - `new JSONConfig().tabs()` : Returns true/false for tabs
 - `new JSONConfig().tabs(true/false)` : Set tabs to true/false
 
@@ -91,8 +83,6 @@ Enabled by default.
 > Using `stringify(config)` `toString(config)` `toBytes(config)`<br/>
 > For when you don't want to use the global settings
 
-- `JSONUtils.className()` : Returns true/false for global className
-- `JSONUtils.className(true/false)` : Set global className to true/false
 - `new JSONConfig().className()` : Returns true/false for className
 - `new JSONConfig().className(true/false)` : Set className to true/false
 
