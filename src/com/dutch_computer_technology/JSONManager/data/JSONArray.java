@@ -384,6 +384,24 @@ public class JSONArray {
 	};
 	
 	/**
+	 * Create a List of Byte's from JSONArray.
+	 * 
+	 * @return A new List of Byte's inside of the JSONArray.
+	 */
+	public List<Byte> getBytes() {
+		return getObjects(Byte.class);
+	};
+	
+	/**
+	 * Create a List of Byte[]'s from JSONArray.
+	 * 
+	 * @return A new List of Byte[]'s inside of the JSONArray.
+	 */
+	public List<byte[]> getBytesArrays() {
+		return getObjects(byte[].class);
+	};
+	
+	/**
 	 * Create a List of Integer's from JSONArray.
 	 * 
 	 * @return A new List of Integer's inside of the JSONArray.
@@ -801,6 +819,78 @@ public class JSONArray {
 	 */
 	public boolean isBoolean(int i) {
 		return isValue(i, Boolean.class);
+	};
+	
+	/**
+	 * Get Byte at given position,<br>
+	 * must be inbound 0-size.
+	 * 
+	 * @param i Postion of Object.
+	 * @return {@code 0x0} when out of bounds or when not a Byte, Byte when found.
+	 */
+	public byte getByte(int i) {
+		return (byte) get(i, (byte) 0x0, Byte.class);
+	};
+	
+	/**
+	 * Get Byte at given position,<br>
+	 * must be inbound 0-size.
+	 * 
+	 * @param i Postion of Object.
+	 * @param def Default return when not found.
+	 * @return {@code def} when out of bounds or when not a Byte, Byte when found.
+	 */
+	public byte getByte(int i, byte def) {
+		return (byte) get(i, def, Byte.class);
+	};
+	
+	/**
+	 * Check if Object at given position is a Byte,<br>
+	 * must be inbound 0-size.
+	 * 
+	 * @param i Postion of Object.
+	 * @return {@code false} when out of bounds or not a Byte, {@code true} when a Byte.
+	 */
+	public boolean isByte(int i) {
+		return isValue(i, Byte.class);
+	};
+	
+	/**
+	 * Get Byte[] at given position,<br>
+	 * must be inbound 0-size.
+	 * 
+	 * @param i Postion of Object.
+	 * @return {@code null} when out of bounds or when not a Byte[], Byte[] when found.
+	 */
+	public byte[] getBytes(int i) {
+		Object b = get(i, null, byte[].class);
+		if (b == null) return null;
+		return (byte[]) b;
+	};
+	
+	/**
+	 * Get Byte[] at given position,<br>
+	 * must be inbound 0-size.
+	 * 
+	 * @param i Postion of Object.
+	 * @param def Default return when not found.
+	 * @return {@code def} when out of bounds or when not a Byte[], Byte[] when found.
+	 */
+	public byte[] getBytes(int i, byte[] def) {
+		Object b = get(i, null, byte[].class);
+		if (b == null) return def;
+		return (byte[]) b;
+	};
+	
+	/**
+	 * Check if Object at given position is a Byte[],<br>
+	 * must be inbound 0-size.
+	 * 
+	 * @param i Postion of Object.
+	 * @return {@code false} when out of bounds or not a Byte[], {@code true} when a Byte[].
+	 */
+	public boolean isBytes(int i) {
+		return isValue(i, byte[].class);
 	};
 	
 	/**

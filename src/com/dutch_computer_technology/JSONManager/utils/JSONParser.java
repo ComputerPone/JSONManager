@@ -2,6 +2,7 @@ package com.dutch_computer_technology.JSONManager.utils;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -310,8 +311,37 @@ public class JSONParser {
 		
 		//String
 		if (str.startsWith("\"") && str.endsWith("\"") && str.length() > 1) {
+			
 			if (str.length() == 2) return "";
+			//Byte
+			if (str.matches("\"0x[a-zA-Z0-9]{2}\"")) {
+				
+				byte[] bytes = null;
+				try {
+					
+					HexFormat hf = HexFormat.of().withUpperCase();
+					bytes = hf.parseHex(str.substring(3, str.length()-1));
+					
+				} catch(IllegalArgumentException ignore) {};
+				if (bytes != null && bytes.length > 0) return bytes[0];
+				
+			};
 			return JSONUtils.unescape(str.substring(1, str.length()-1));
+			
+		};
+		
+		//Bytes
+		if (str.startsWith("b[") && str.endsWith("]")) {
+			
+			List<Byte> bytesArray = new JSONArray(str.substring(1)).getBytes();
+			byte[] bytes = new byte[bytesArray.size()];
+			for (int i = 0; i < bytesArray.size(); i++) {
+				
+				bytes[i] = bytesArray.get(i);
+				
+			};
+			return bytes;
+			
 		};
 		
 		//JSONObject

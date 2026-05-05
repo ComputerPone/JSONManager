@@ -5,10 +5,10 @@ package com.dutch_computer_technology.JSONManager.utils;
  */
 public class JSONConfig {
 	
-	private boolean threaded = JSONUtils.threaded();
-	private boolean suffix = JSONUtils.suffix();
-	private boolean tabs = JSONUtils.tabs();
-	private boolean className = JSONUtils.className();
+	private boolean threaded = false;
+	private boolean suffix = false;
+	private boolean tabs = false;
+	private boolean className = true;
 	
 	/**
 	 * Create a config with Default settings

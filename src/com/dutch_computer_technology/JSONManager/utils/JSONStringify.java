@@ -3,6 +3,7 @@ package com.dutch_computer_technology.JSONManager.utils;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -269,6 +270,30 @@ public class JSONStringify {
 				return new StringBuilder(Float.toString(flo)).append(suffix ? "F" : "").toString();
 				
 			};
+		
+		//Bytes
+		if (obj instanceof Byte || obj instanceof byte[]) {
+			
+			HexFormat hf = HexFormat.of().withUpperCase();
+			if (obj instanceof Byte) return new StringBuilder("\"0x").append(hf.toHexDigits((byte) obj)).append("\"").toString();
+			if (obj instanceof byte[]) {
+				
+				byte[] bytes = (byte[]) obj;
+				StringBuilder str = new StringBuilder();
+				if (suffix) str.append("b");
+				str.append("[");
+				for (int i = 0; i < bytes.length; i++) {
+					
+					str.append("\"0x").append(hf.toHexDigits(bytes[i])).append("\"");
+					if (i < bytes.length - 1) str.append(",");
+					
+				};
+				str.append("]");
+				return str.toString();
+				
+			};
+			
+		};
 		
 		//Object
 		Class<?> cls = obj.getClass();

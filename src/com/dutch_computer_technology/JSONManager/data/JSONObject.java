@@ -659,7 +659,73 @@ public class JSONObject {
 	public boolean isBoolean(String key) {
 		return isValue(key, Boolean.class);
 	};
-		
+	
+	/**
+	 * Get Byte from key.
+	 * 
+	 * @param key key.
+	 * @return {@code 0x0} when not found, Byte when found.
+	 */
+	public byte getByte(String key) {
+		return (byte) get(key, (byte) 0x0, Byte.class);
+	};
+	
+	/**
+	 * Get Byte from key.
+	 * 
+	 * @param key key.
+	 * @param def Default return when not found.
+	 * @return {@code def} when not found, Byte when found.
+	 */
+	public byte getByte(String key, byte def) {
+		return (byte) get(key, def, Byte.class);
+	};
+	
+	/**
+	 * check if Object from key is a Byte.
+	 * 
+	 * @param key key.
+	 * @return {@code false} when not a Byte, {@code true} when a Byte.
+	 */
+	public boolean isByte(String key) {
+		return isValue(key, Byte.class);
+	};
+	
+	/**
+	 * Get Byte[] from key.
+	 * 
+	 * @param key key.
+	 * @return {@code null} when not found, Byte[] when found.
+	 */
+	public byte[] getBytes(String key) {
+		Object b = get(key, null, byte[].class);
+		if (b == null) return null;
+		return (byte[]) b;
+	};
+	
+	/**
+	 * Get Byte[] from key.
+	 * 
+	 * @param key key.
+	 * @param def Default return when not found.
+	 * @return {@code def} when not found, Byte[] when found.
+	 */
+	public byte[] getBytes(String key, byte[] def) {
+		Object b = get(key, null, byte[].class);
+		if (b == null) return def;
+		return (byte[]) b;
+	};
+	
+	/**
+	 * check if Object from key is a Byte.
+	 * 
+	 * @param key key.
+	 * @return {@code false} when not a Byte[], {@code true} when a Byte[].
+	 */
+	public boolean isBytes(String key) {
+		return isValue(key, byte[].class);
+	};
+	
 	/**
 	 * Get JSONObject from key.
 	 * 

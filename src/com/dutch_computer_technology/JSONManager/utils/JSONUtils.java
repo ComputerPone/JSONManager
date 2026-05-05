@@ -1,19 +1,9 @@
 package com.dutch_computer_technology.JSONManager.utils;
 
 /**
- * Utils &amp; Settings
+ * Utils
  */
 public class JSONUtils {
-	
-	/**
-	 * Utils &amp; Settings
-	 */
-	public JSONUtils() {};
-	
-	private static boolean threaded = false;
-	private static boolean suffix = false;
-	private static boolean tabs = false;
-	private static boolean className = true;
 	
 	/**
 	 * Returns the current version of the JSONManager
@@ -22,73 +12,7 @@ public class JSONUtils {
 	 */
 	public static String version() {
 		
-		return "3.0.2";
-		
-	};
-	
-	/**
-	 * Enable/Disable Threading for Parsing/Stringifying JSON
-	 * 
-	 * @param threaded {@code true}/{@code false}
-	 */
-	public static void threaded(boolean threaded) {
-		
-		JSONUtils.threaded = threaded;
-		
-	};
-	
-	/**
-	 * Use Threads to Parse/Stringify JSON
-	 * 
-	 * @return {@code true} When Threading enabled, {@code false} When using single Thread.
-	 */
-	public static boolean threaded() {
-		
-		return threaded;
-		
-	};
-	
-	/**
-	 * Add suffix's behind Value's when stringified
-	 * 
-	 * @param suffix {@code true}/{@code false}
-	 */
-	public static void suffix(boolean suffix) {
-		
-		JSONUtils.suffix = suffix;
-		
-	};
-	
-	/**
-	 * Get if suffix's are added behind Value's when stringified
-	 * 
-	 * @return {@code true} When adding suffix's, {@code false} When none are added.
-	 */
-	public static boolean suffix() {
-		
-		return suffix;
-		
-	};
-	
-	/**
-	 * Add tabs when stringified
-	 * 
-	 * @param tabs {@code true}/{@code false}
-	 */
-	public static void tabs(boolean tabs) {
-		
-		JSONUtils.tabs = tabs;
-		
-	};
-	
-	/**
-	 * Get if tabs are added when stringified
-	 * 
-	 * @return {@code true} When tabs are added, {@code false} When tabs will not be added.
-	 */
-	public static boolean tabs() {
-		
-		return tabs;
+		return "3.1.0";
 		
 	};
 	
@@ -109,28 +33,6 @@ public class JSONUtils {
 	};
 	
 	/**
-	 * Add className when a Class with toJSON is stringified
-	 * 
-	 * @param className {@code true}/{@code false}
-	 */
-	public static void className(boolean className) {
-		
-		JSONUtils.className = className;
-		
-	};
-	
-	/**
-	 * Get if className is added when a Class with toJSON is stringified
-	 * 
-	 * @return {@code true} When className is added, {@code false} When className will not be added.
-	 */
-	public static boolean className() {
-		
-		return className;
-		
-	};
-	
-	/**
 	 * Remove special characters before parsing,<br>
 	 * Tabs Spaces Newlines
 	 * 
@@ -138,23 +40,32 @@ public class JSONUtils {
 	 * @return Sanitized String ready to parse
 	 */
 	public static String sanitize(String str) {
-		str = str.replace("\n", "");
-		str = str.replace("\b", "");
-		str = str.replace("\f", "");
-		str = str.replace("\r", "");
-		str = str.replace("\t", "");
-		StringBuilder strOut = new StringBuilder();
-		boolean open = false;
-		for (int i = 0; i < str.length(); i++) {
-			char chr = str.charAt(i);
-			if (chr == '"') open = !open;
-			if (open) {
-				strOut.append(chr);
-			} else if (chr != ' ') {
-				strOut.append(chr);
+		
+		str = str.replaceAll("[\n|\b|\f|\r|\t]", "");
+		StringBuilder sanitized = new StringBuilder();
+		char quot = 0;
+		for (char chr : str.toCharArray()) {
+			
+			if (chr == ' ' && quot == 0) continue;
+			if (chr == '"' || chr == '\'') {
+				
+				if (quot == 0) {
+					
+					quot = chr;
+					
+				} else {
+					
+					quot = 0;
+					
+				};
+				chr = '"';
+				
 			};
+			sanitized.append(chr);
+			
 		};
-		return strOut.toString();
+		return sanitized.toString();
+		
 	};
 	
 	/**
@@ -164,6 +75,7 @@ public class JSONUtils {
 	 * @return Escaped String
 	 */
 	public static String escape(String str) {
+		
 		str = str.replace("\\", "\\\\");
 		str = str.replace("/", "\\/");
 		str = str.replace("\"", "\\\"");
@@ -173,6 +85,7 @@ public class JSONUtils {
 		str = str.replace("\r", "\\r");
 		str = str.replace("\t", "\\t");
 		return str;
+		
 	};
 	
 	/**
@@ -182,6 +95,7 @@ public class JSONUtils {
 	 * @return Unescaped String
 	 */
 	public static String unescape(String str) {
+		
 		str = str.replace("\\\\", "\\");
 		str = str.replace("\\/", "/");
 		str = str.replace("\\\"", "\"");
@@ -191,6 +105,7 @@ public class JSONUtils {
 		str = str.replace("\\r", "\r");
 		str = str.replace("\\t", "\t");
 		return str;
+		
 	};
 	
 };
